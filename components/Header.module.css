@@ -1,0 +1,25 @@
+.header nav {
+  /* max-width: 42rem; */
+  /* margin: 0 auto; */
+  padding: 0.2rem 1.25rem;
+}
+.header ul {
+  display: flex;
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0;
+}
+.header a {
+  text-decoration: none;
+}
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.logo {
+  color: #474646;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
