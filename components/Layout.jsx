@@ -1,5 +1,4 @@
 import Head from 'next/head';
-
 import Header from './Header';
 import css from './Layout.module.css';
 

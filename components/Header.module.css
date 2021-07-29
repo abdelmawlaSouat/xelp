@@ -17,9 +17,22 @@
   justify-content: space-around;
   align-items: center;
 }
-.logo {
+.logo a {
   color: #474646;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 2rem;
   font-weight: bold;
+}
+
+.dialogTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding: 1rem 0.5rem 1rem 1.25rem;
+}
+
+.dialogTitle button {
+  padding: 0;
 }

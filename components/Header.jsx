@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import Link from 'next/link';
+
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import { AiOutlineClose } from 'react-icons/ai';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from '@material-ui/core/IconButton';
+import DialogContent from '@material-ui/core/DialogContent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import IconButton from '@material-ui/core/IconButton';
+
+import { AiOutlineClose } from 'react-icons/ai';
+import AuthForm from './AuthenticationForm';
 
 import { useUser } from '../lib/hooks';
 
@@ -28,21 +28,27 @@ const Header = () => {
     setOpen(!open);
   };
 
-  const handleClose = () => {
-    // setDialogType('');
-    setOpen(!open);
-  };
+  const handleClose = () => setOpen(!open);
 
   const CloseBtn = () => (
-    <IconButton aria-label="close-dialog" onClick={handleClose}>
+    <IconButton
+      aria-label="close-dialog"
+      onClick={handleClose}
+      className={css.closeBtn}
+    >
       <AiOutlineClose />
     </IconButton>
   );
 
+  const handleDialogType = (formType) => setDialogType(formType);
+
   return (
     <header className={css.header}>
       <div className={css.logo}>
-        <span>xelp</span>
+        <Link href="/">
+          <a>xelp</a>
+        </Link>
+        {/* <span></span> */}
       </div>
       <nav>
         <ul>
@@ -91,18 +97,31 @@ const Header = () => {
         aria-labelledby="responsive-dialog-title"
       >
         {dialogType === 'sign-in' ? (
-          <DialogTitle id="responsive-dialog-title">
-            <span>Sign in</span>
-            <CloseBtn />
-          </DialogTitle>
+          <>
+            <div className={css.dialogTitle}>
+              <span>Sign in</span>
+              <CloseBtn />
+            </div>
+            <DialogContent>
+              <AuthForm
+                dialogType={dialogType}
+                handleDialogType={handleDialogType}
+              />
+            </DialogContent>
+          </>
         ) : (
-          // <DialogContent></DialogContent>
-
-          <DialogTitle id="responsive-dialog-title">
-            <span>Sign up</span>
-            <CloseBtn />
-          </DialogTitle>
-          // <DialogContent></DialogContent>
+          <>
+            <div className={css.dialogTitle}>
+              <span>Sign up</span>
+              <CloseBtn />
+            </div>
+            <DialogContent>
+              <AuthForm
+                dialogType={dialogType}
+                handleDialogType={handleDialogType}
+              />
+            </DialogContent>
+          </>
         )}
       </Dialog>
     </header>

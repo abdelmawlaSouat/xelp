@@ -1,0 +1,9 @@
+.authForm,
+.btnsContainer {
+  display: flex;
+  flex-flow: column;
+}
+
+.authForm button {
+  margin: 0.5rem 0;
+}
