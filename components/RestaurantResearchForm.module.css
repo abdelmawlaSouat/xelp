@@ -1,0 +1,15 @@
+.container {
+  padding: 3rem;
+  margin-top: 2rem;
+  /* border: 1px solid black;
+  border-radius: 15px; */
+}
+
+.sliderContainer {
+  margin: 1rem 0;
+}
+
+.sliderContainer > span:first-child {
+  font-size: 0.9rem;
+  color: grey;
+}
