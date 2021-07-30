@@ -1,0 +1,79 @@
+.card a {
+  margin: 1rem;
+  padding: 1rem 1.5rem;
+  border: 1px #c9c9c9 solid;
+  border-radius: 5px;
+  display: flex;
+  /* width: 35rem; */
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.card a:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.imageUrl {
+  width: 220px;
+  height: 220px;
+  border-radius: 5px;
+  margin-right: 2rem;
+}
+
+.cardTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-top: 7px;
+}
+
+.name {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: rgb(10, 56, 71);
+  margin-bottom: 2px;
+}
+
+.categoriesAndPrice {
+  color: rgb(102, 102, 102);
+  font-style: italic;
+  margin: 0;
+}
+
+.phone,
+.secondaryData {
+  color: rgb(102, 102, 102);
+}
+
+.secondaryData {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  font-weight: 400;
+}
+
+.secondaryData > div {
+  margin-right: 1rem;
+}
+
+.secondaryData svg {
+  width: 15px;
+  height: 15px;
+  margin-right: 3px;
+}
+
+.rating {
+  color: #ff8000;
+}
+
+.adresse {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+  color: rgb(102, 102, 102);
+  /* font-size: 0.95rem; */
+}
+.adresse span {
+  line-height: 1.35rem;
+}

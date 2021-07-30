@@ -124,7 +124,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
 
   useEffect(() => {
     getUserPosition();
-  }, [userCoords]);
+  }, []);
 
   async function searchRestaurants() {
     const researchParams = {

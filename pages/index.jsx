@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/Layout';
-
+import BusinessCard from '../components/BusinessCard';
 import RestaurantResearchForm from '../components/RestaurantResearchForm';
+
+import css from '../styles/index.module.css';
 
 const Home = () => {
   const [businesses, setBusinesses] = useState([]);
@@ -16,9 +18,11 @@ const Home = () => {
         handleBusinesses={(newArray) => setBusinesses(newArray)}
       />
 
-      <div className="businessesContainer">
+      <div className={css.businessesContainer}>
         {businesses.length > 0 &&
-          businesses.map((item) => <h3>{item.name}</h3>)}
+          businesses.map((business) => (
+            <BusinessCard key={business.id} businessData={business} />
+          ))}
       </div>
 
       {user && (
@@ -27,16 +31,6 @@ const Home = () => {
           <pre>{JSON.stringify(user, null, 2)}</pre>
         </>
       )}
-
-      <style jsx>{`
-        li {
-          margin-bottom: 0.5rem;
-        }
-        pre {
-          white-space: pre-wrap;
-          word-wrap: break-word;
-        }
-      `}</style>
     </Layout>
   );
 };

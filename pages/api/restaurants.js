@@ -31,7 +31,7 @@ export default async function restaurants(req, res) {
     // );
 
     const rawData = await fetch(
-      `${API_BASE_URL}/businesses/search?term=food&longitude=${userCoords.longitude}&latitude=${userCoords.latitude}`,
+      `${API_BASE_URL}/businesses/search?term=food&limit=10&longitude=${userCoords.longitude}&latitude=${userCoords.latitude}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.API_KEY_YELP}`,
