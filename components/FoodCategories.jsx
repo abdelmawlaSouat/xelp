@@ -1,5 +1,5 @@
 import { Grid, Button } from '@material-ui/core';
-
+import PropTypes from 'prop-types';
 import css from './FoodCategories.module.css';
 
 const FoodCategories = ({
@@ -38,5 +38,25 @@ const FoodCategories = ({
     })}
   </Grid>
 );
+
+FoodCategories.propTypes = {
+  handleSelectedCategories: PropTypes.func.isRequired,
+  selectedCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      icon: PropTypes.element,
+      isSelected: PropTypes.bool,
+    })
+  ).isRequired,
+  allCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      icon: PropTypes.element,
+      isSelected: PropTypes.bool,
+    })
+  ).isRequired,
+};
 
 export default FoodCategories;
