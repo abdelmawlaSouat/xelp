@@ -108,22 +108,32 @@ const RestaurantResearchForm = () => {
   const [maxDistance, setMaxDistance] = useState(30);
   const [rangePrice, setRangePrice] = useState([10, 40]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [userCoords, setUserCoords] = useState({});
+
+  function getUserPosition() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserCoords({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+        console.log(position.coords);
+      },
+      (err) => console.warn(`ERREUR (${err.code}): ${err.message}`)
+    );
+  }
 
   function searchRestaurants() {
-    console.log({
-      localisation,
-      maxDistance,
-      rangePrice,
-      selectedCategories,
-    });
-  }
+    // console.log({
+    //   localisation,
+    //   maxDistance,
+    //   rangePrice,
+    //   selectedCategories,
+    // });
 
-  function onChangeRangePrice(e, newValue) {
-    setRangePrice(newValue);
-  }
-
-  function handleSelectedCategories(newArray) {
-    setSelectedCategories(newArray);
+    if ('geolocation' in navigator) {
+      getUserPosition();
+    }
   }
 
   return (
@@ -157,13 +167,15 @@ const RestaurantResearchForm = () => {
                 index === 0 ? 'Minimum price' : 'Maximum price'
               }
               value={rangePrice}
-              onChange={onChangeRangePrice}
+              onChange={(e, newValue) => setRangePrice(newValue)}
             />
           </div>
 
           <FoodCategories
             selectedCategories={selectedCategories}
-            handleSelectedCategories={handleSelectedCategories}
+            handleSelectedCategories={(newArray) =>
+              setSelectedCategories(newArray)
+            }
             allCategories={allCategories}
           />
 
