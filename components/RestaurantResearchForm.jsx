@@ -1,5 +1,5 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
@@ -103,7 +103,7 @@ const allCategories = [
   },
 ];
 
-const RestaurantResearchForm = () => {
+const RestaurantResearchForm = ({ handleBusinesses }) => {
   const [localisation, setLocalisation] = useState('');
   const [maxDistance, setMaxDistance] = useState(30);
   const [rangePrice, setRangePrice] = useState([10, 40]);
@@ -117,22 +117,33 @@ const RestaurantResearchForm = () => {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         });
-        console.log(position.coords);
       },
       (err) => console.warn(`ERREUR (${err.code}): ${err.message}`)
     );
   }
 
-  function searchRestaurants() {
-    // console.log({
-    //   localisation,
-    //   maxDistance,
-    //   rangePrice,
-    //   selectedCategories,
-    // });
+  useEffect(() => {
+    getUserPosition();
+  }, [userCoords]);
+
+  async function searchRestaurants() {
+    const researchParams = {
+      localisation,
+      maxDistance,
+      rangePrice,
+      selectedCategories,
+      userCoords,
+    };
 
     if ('geolocation' in navigator) {
-      getUserPosition();
+      try {
+        getUserPosition();
+        const response = await axios.post('api/restaurants', researchParams);
+        handleBusinesses(response.data);
+        console.log(response.data);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 
