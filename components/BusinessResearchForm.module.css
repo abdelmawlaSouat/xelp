@@ -1,0 +1,26 @@
+.container {
+  padding: 3rem;
+  margin-top: 2rem;
+  max-width: 50rem;
+}
+
+.sliderContainer,
+.priceTypes {
+  margin: 1rem 0;
+}
+
+.priceTypes > span {
+  margin-right: 1rem;
+}
+
+.sliderContainer > span:first-child,
+.priceTypes > span {
+  font-size: 0.9rem;
+  color: grey;
+}
+
+.InputsContainer {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+}

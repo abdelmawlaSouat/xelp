@@ -6,38 +6,39 @@ const FoodCategories = ({
   selectedCategories,
   handleSelectedCategories,
   allCategories,
-}) => (
-  <Grid container className={css.foodCategories} spacing={1}>
-    {allCategories.map((categorie) => {
-      function onClickCategorie() {
-        let newSelectedCategoriesList = [];
-        const toggleCategorie = categorie;
+}) => {
+  function onClickCategorie(categorie) {
+    let newSelectedCategoriesList = [];
+    const toggleCategorie = categorie;
 
-        toggleCategorie.isSelected = !toggleCategorie.isSelected;
-        newSelectedCategoriesList = selectedCategories.filter(
-          (c) => c.id !== toggleCategorie.id
-        );
-        if (toggleCategorie.isSelected) {
-          newSelectedCategoriesList.push(toggleCategorie);
-        }
-        handleSelectedCategories(newSelectedCategoriesList);
-      }
+    toggleCategorie.isSelected = !toggleCategorie.isSelected;
+    newSelectedCategoriesList = selectedCategories.filter(
+      (c) => c.id !== toggleCategorie.id
+    );
+    if (toggleCategorie.isSelected) {
+      newSelectedCategoriesList.push(toggleCategorie);
+    }
+    handleSelectedCategories(newSelectedCategoriesList);
+  }
 
-      return (
-        <Grid item xs={3} key={categorie.id}>
+  return (
+    <Grid container className={css.foodCategories} spacing={2}>
+      {allCategories.map((categorie) => (
+        <Grid item xs={2} key={categorie.id}>
           <Button
             variant={categorie.isSelected ? 'contained' : 'outlined'}
             color="secondary"
+            size="small"
             startIcon={categorie.icon}
-            onClick={onClickCategorie}
+            onClick={() => onClickCategorie(categorie)}
           >
             {categorie.name}
           </Button>
         </Grid>
-      );
-    })}
-  </Grid>
-);
+      ))}
+    </Grid>
+  );
+};
 
 FoodCategories.propTypes = {
   handleSelectedCategories: PropTypes.func.isRequired,

@@ -17,7 +17,7 @@ import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 // import PlacesAutocomplete from './InputPlacesAutoComplete';
-import css from './RestaurantResearchForm.module.css';
+import css from './BusinessResearchForm.module.css';
 
 import FoodCategories from './FoodCategories';
 
@@ -34,7 +34,7 @@ const PrettoSlider = withStyles({
     marginTop: -8,
     marginLeft: -12,
 
-    '&:focus, &:hover, &$active': {
+    '&:focus, &:hover, &€active': {
       boxShadow: 'inherit',
     },
   },
@@ -103,10 +103,33 @@ const allCategories = [
   },
 ];
 
+const priceTypes = [
+  {
+    id: 1,
+    value: '€',
+    isSelected: false,
+  },
+  {
+    id: 2,
+    value: '€€',
+    isSelected: false,
+  },
+  {
+    id: 3,
+    value: '€€€',
+    isSelected: false,
+  },
+  {
+    id: 4,
+    value: '€€€€',
+    isSelected: false,
+  },
+];
+
 const RestaurantResearchForm = ({ handleBusinesses }) => {
   const [localisation, setLocalisation] = useState('');
-  const [maxDistance, setMaxDistance] = useState(30);
-  const [rangePrice, setRangePrice] = useState([10, 40]);
+  const [maxDistance, setMaxDistance] = useState(10);
+  const [rangePrice, setRangePrice] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [userCoords, setUserCoords] = useState({});
 
@@ -147,39 +170,60 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
     }
   }
 
+  function onCLickRangePrice(price) {
+    let newArray = [];
+    const togglePrice = price;
+
+    togglePrice.isSelected = !togglePrice.isSelected;
+    newArray = rangePrice.filter((c) => c.id !== togglePrice.id);
+    if (togglePrice.isSelected) {
+      newArray.push(togglePrice);
+    }
+    setRangePrice(newArray);
+    console.log(newArray);
+  }
+
   return (
     <>
       <Card className={css.container}>
         <form>
-          <FormControl fullWidth>
-            <TextField
-              name="localisation"
-              label="City"
-              onChange={(e) => setLocalisation(e.target.value)}
-            />
-          </FormControl>
+          <div className={css.InputsContainer}>
+            <FormControl>
+              <TextField
+                name="localisation"
+                label="City"
+                onChange={(e) => setLocalisation(e.target.value)}
+              />
+            </FormControl>
 
-          <div className={css.sliderContainer}>
-            <span>Max Distance (km)</span>
-            <PrettoSlider
-              id="max_distance"
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              value={maxDistance}
-              onChange={(e, newValue) => setMaxDistance(newValue)}
-            />
-          </div>
+            <div className={css.priceTypes}>
+              <span>Price (€)</span>
+              {priceTypes.map((price) => (
+                <Button
+                  key={price.id}
+                  variant={price.isSelected ? 'contained' : 'outlined'}
+                  color="secondary"
+                  value={price.id}
+                  size="small"
+                  onClick={() => onCLickRangePrice(price)}
+                >
+                  {price.value}
+                </Button>
+              ))}
+            </div>
 
-          <div className={css.sliderContainer}>
-            <span>Price (€)</span>
-            <PrettoSlider
-              valueLabelDisplay="auto"
-              getAriaLabel={(index) =>
-                index === 0 ? 'Minimum price' : 'Maximum price'
-              }
-              value={rangePrice}
-              onChange={(e, newValue) => setRangePrice(newValue)}
-            />
+            <div className={css.sliderContainer}>
+              <span>Max Distance (km)</span>
+              <PrettoSlider
+                id="max_distance"
+                valueLabelDisplay="auto"
+                aria-label="pretto slider"
+                value={maxDistance}
+                min={0}
+                max={20}
+                onChange={(e, newValue) => setMaxDistance(newValue)}
+              />
+            </div>
           </div>
 
           <FoodCategories
