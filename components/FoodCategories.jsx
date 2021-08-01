@@ -22,9 +22,14 @@ const FoodCategories = ({
   }
 
   return (
-    <Grid container className={css.foodCategories} spacing={1}>
+    <Grid
+      container
+      className={css.foodCategories}
+      spacing={1}
+      justifyContent="center"
+    >
       {allCategories.map((categorie) => (
-        <Grid item xs={3} key={categorie.id}>
+        <Grid item xs={5} sm={4} md={3} key={categorie.id}>
           <Button
             variant={categorie.isSelected ? 'contained' : 'outlined'}
             color="secondary"

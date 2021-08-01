@@ -4,7 +4,6 @@
   border: 1px #c9c9c9 solid;
   border-radius: 5px;
   display: flex;
-  /* width: 35rem; */
   transition: all 0.2s ease;
   text-decoration: none;
 }
@@ -75,4 +74,20 @@
 }
 .adresse span {
   line-height: 1.35rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .imageUrl {
+    margin-right: 0;
+  }
+
+  .cardTextContainer {
+    margin-top: 1rem;
+  }
+
+  .card a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }

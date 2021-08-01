@@ -201,18 +201,20 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
 
             <div className={css.priceTypes}>
               <span>Price (€)</span>
-              {priceTypes.map((price) => (
-                <Button
-                  key={price.value}
-                  variant={price.isSelected ? 'contained' : 'outlined'}
-                  color="secondary"
-                  value={price.value}
-                  size="small"
-                  onClick={() => onCLickRangePrice(price)}
-                >
-                  {price.label}
-                </Button>
-              ))}
+              <div>
+                {priceTypes.map((price) => (
+                  <Button
+                    key={price.value}
+                    variant={price.isSelected ? 'contained' : 'outlined'}
+                    color="secondary"
+                    value={price.value}
+                    size="small"
+                    onClick={() => onCLickRangePrice(price)}
+                  >
+                    {price.label}
+                  </Button>
+                ))}
+              </div>
             </div>
 
             <div className={css.sliderContainer}>
@@ -236,7 +238,6 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
             }
             allCategories={allCategories}
           />
-          {localisation}
           <Button
             variant="contained"
             color="secondary"

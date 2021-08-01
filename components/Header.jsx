@@ -18,7 +18,7 @@ import css from './Header.module.css';
 const Header = () => {
   const [dialogType, setDialogType] = useState('');
   const [open, setOpen] = useState(false);
-  const user = useUser();
+  // const user = useUser();
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -48,11 +48,10 @@ const Header = () => {
         <Link href="/">
           <a>xelp</a>
         </Link>
-        {/* <span></span> */}
       </div>
       <nav>
         <ul>
-          {user ? (
+          {0 === 1 ? (
             <>
               <li>
                 <Link href="/">

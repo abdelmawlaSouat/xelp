@@ -46,7 +46,7 @@ function PlacesAutocomplete({ handleLocalisation }) {
 }
 
 PlacesAutocomplete.propTypes = {
-  handleBusinesses: PropTypes.func.isRequired,
+  handleLocalisation: PropTypes.func.isRequired,
 };
 
 export default PlacesAutocomplete;
