@@ -3,6 +3,7 @@ const PATH = '/businesses/search';
 
 function getFilters(obj) {
   const filters = {
+    localisation: obj.localisation,
     radius: obj.maxDistance * 1000,
     price: '',
     categories: '',
@@ -30,7 +31,11 @@ function getUrl(filters, userCoords) {
   let url = `${API_BASE_URL}${PATH}?term=food`;
   const { longitude, latitude } = userCoords;
 
-  url += `&longitude=${longitude}&latitude=${latitude}`;
+  if (filters.localisation) {
+    url += `&location=${filters.localisation}`;
+  } else {
+    url += `&longitude=${longitude}&latitude=${latitude}`;
+  }
   url += `&radius=${filters.radius}`;
   if (filters.price !== '') {
     url += `&price=${filters.price}`;
@@ -52,10 +57,9 @@ export default async function restaurants(req, res) {
     });
     const resp = await rawData.json();
 
-    // console.log(req.body);
-    console.log(filters);
+    // console.log(filters);
     console.log(url);
-    console.log(resp.businesses);
+    // console.log(resp.businesses);
 
     res.status(200).json(resp.businesses);
   } catch (error) {
