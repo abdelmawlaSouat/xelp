@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 function PlacesAutocomplete({ handleLocalisation }) {
   const [, setInputValue] = useState('');
@@ -43,5 +44,9 @@ function PlacesAutocomplete({ handleLocalisation }) {
     />
   );
 }
+
+PlacesAutocomplete.propTypes = {
+  handleBusinesses: PropTypes.func.isRequired,
+};
 
 export default PlacesAutocomplete;

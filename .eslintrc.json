@@ -18,6 +18,8 @@
     "react/jsx-indent-props": "off",
     "react/prop-types": "warn",
     "jsx-a11y/anchor-is-valid": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "no-unused-vars": "warn",
+    "arrow-body-style": "warn"
   }
 }

@@ -14,7 +14,7 @@ import {
 } from 'react-icons/gi';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
-
+import PropTypes from 'prop-types';
 import PlacesAutocomplete from './InputPlacesAutoComplete';
 import css from './BusinessResearchForm.module.css';
 
@@ -248,6 +248,10 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
       </Card>
     </>
   );
+};
+
+RestaurantResearchForm.propTypes = {
+  handleBusinesses: PropTypes.func.isRequired,
 };
 
 export default RestaurantResearchForm;

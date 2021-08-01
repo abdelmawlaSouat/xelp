@@ -1,5 +1,4 @@
-// import { Card } from '@material-ui/core';
-
+/* eslint-disable react/prop-types */
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiComment, BiPhone } from 'react-icons/bi';
 import css from './BusinessCard.module.css';
