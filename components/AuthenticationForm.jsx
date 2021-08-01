@@ -4,37 +4,33 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
-import { useUser } from '../lib/hooks';
+// import { useUser } from '../lib/hooks';
 import css from './AuthenticationForm.module.css';
 
 const AuthForm = ({ dialogType, handleDialogType }) => {
-  useUser({ redirectTo: '/', redirectIfFound: true });
+  // useUser({ redirectTo: '/', redirectIfFound: true });
 
   const [errorMsg, setErrorMsg] = useState('');
 
   async function handleSignInFormSubmit(e) {
     e.preventDefault();
+    const { username, password } = e.currentTarget;
+
+    console.log(username.value, password.value);
 
     if (errorMsg) setErrorMsg('');
-
-    const body = {
-      username: e.currentTarget.username.value,
-      password: e.currentTarget.password.value,
-    };
-
-    console.log(body);
-
     try {
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+      const res = await axios.post('/api/login', {
+        username: username.value,
+        password: password.value,
       });
       if (res.status === 200) {
-        Router.push('/profile');
+        console.log('Success (authentication)');
+        // Router.push('/profile');
       } else {
-        throw new Error(await res.text());
+        console.log('Failed (authentication)');
       }
     } catch (error) {
       console.error('An unexpected error happened occurred:', error);
@@ -44,33 +40,32 @@ const AuthForm = ({ dialogType, handleDialogType }) => {
 
   async function handleSignUpFormSubmit(e) {
     e.preventDefault();
+    const { username, password, rpassword } = e.currentTarget;
 
     if (errorMsg) setErrorMsg('');
-
-    const body = {
-      username: e.currentTarget.username.value,
-      password: e.currentTarget.password.value,
-    };
-
-    if (body.password !== e.currentTarget.rpassword.value) {
+    if (!username.value) {
+      setErrorMsg(`Username is empty`);
+      return;
+    }
+    if (password.value.length < 8) {
+      setErrorMsg(`The password must contain at least 8 characters`);
+      return;
+    }
+    if (password.value !== rpassword.value) {
       setErrorMsg(`The passwords don't match`);
       return;
     }
-
     try {
-      const res = await fetch('/api/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+      const res = await axios.post('api/signup', {
+        username: username.value,
+        password: password.value,
       });
 
-      if (res.status === 200) {
-        handleDialogType('sign-in');
-      } else {
-        throw new Error(await res.text());
+      if (!res.data.user) {
+        setErrorMsg(`User already exists`);
+        return;
       }
     } catch (error) {
-      console.error('An unexpected error happened occurred:', error);
       setErrorMsg(error.message);
     }
   }
