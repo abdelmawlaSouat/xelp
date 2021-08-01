@@ -1,60 +1,61 @@
-// import queryString from 'query-string';
-
 const API_BASE_URL = 'https://api.yelp.com/v3';
+const PATH = '/businesses/search';
 
-// export function get(path, params) {
-//   const query = queryString.stringify(params);
+function getFilters(obj) {
+  const filters = {
+    radius: obj.maxDistance * 1000,
+    price: '',
+    categories: '',
+  };
+  const { rangePrice, selectedCategories: categories } = obj;
 
-//   return fetch(`${API_BASE_URL}${path}?${query}`, {
-//     headers: {
-//       Authorization: `Bearer ${process.env.NEXT_PUBLIC_API_KEY_YELP}`,
-//       Origin: 'localhost',
-//       withCredentials: true,
-//     },
-//   });
-// }
-// https://api.yelp.com/v3/businesses/search?location=paris
+  rangePrice.forEach((price) => {
+    filters.price += price.value;
+    if (rangePrice.indexOf(price) < rangePrice.length - 1) {
+      filters.price += ', ';
+    }
+  });
+
+  categories.forEach((categorie) => {
+    filters.categories += categorie.value;
+    if (categories.indexOf(categorie) < categories.length - 1) {
+      filters.categories += ',';
+    }
+  });
+
+  return filters;
+}
+
+function getUrl(filters, userCoords) {
+  let url = `${API_BASE_URL}${PATH}?term=food`;
+  const { longitude, latitude } = userCoords;
+
+  url += `&longitude=${longitude}&latitude=${latitude}`;
+  url += `&radius=${filters.radius}`;
+  if (filters.price !== '') {
+    url += `&price=${filters.price}`;
+  }
+  if (filters.categories.length > 0) {
+    url += `&categories=${filters.categories}`;
+  }
+
+  return url;
+}
 
 export default async function restaurants(req, res) {
   try {
-    const {
-      userCoords,
-      localisation,
-      maxDistance,
-      rangePrice,
-      selectedCategories,
-    } = req.body;
-
-    console.log(req.body);
-    // console.log(
-    //   `${API_BASE_URL}/businesses/search?term=food&longitude=${userCoords.longitude}&latitude=${userCoords.latitude}`
-    // );
-
-    const rawData = await fetch(
-      `${API_BASE_URL}/businesses/search?term=food&limit=10&longitude=${userCoords.longitude}&latitude=${userCoords.latitude}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.API_KEY_YELP}`,
-          Origin: 'localhost',
-          withCredentials: true,
-        },
-      }
-    );
+    const { userCoords } = req.body;
+    const filters = getFilters(req.body);
+    const url = getUrl(filters, userCoords);
+    const rawData = await fetch(url, {
+      headers: { Authorization: `Bearer ${process.env.API_KEY_YELP}` }, // withCredentials: true,
+    });
     const resp = await rawData.json();
 
+    // console.log(req.body);
+    console.log(filters);
+    console.log(url);
     console.log(resp.businesses);
-
-    // const filteredArray = resp.businesses.map((item) => {
-    //   const { id, name, image_url,  } = item;
-
-    //   return {
-    //     id,
-    //     name,
-    //     image_url,
-    //   };
-    // });
-
-    // console.log(filteredArray);
 
     res.status(200).json(resp.businesses);
   } catch (error) {

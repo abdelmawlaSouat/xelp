@@ -36,7 +36,7 @@ const BusinessCard = ({ businessData }) => {
 
           <div className={css.adresse}>
             {businessData.location.display_address.map((item) => (
-              <span>{item}</span>
+              <span key={item}>{item}</span>
             ))}
           </div>
 

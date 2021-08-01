@@ -55,48 +55,56 @@ const PrettoSlider = withStyles({
 const allCategories = [
   {
     id: 1,
+    value: 'japanese',
     name: 'Japanese Food',
     icon: <GiSushis />,
     isSelected: false,
   },
   {
     id: 2,
+    value: 'italian',
     name: 'Italian Food',
     icon: <GiPizzaSlice />,
     isSelected: false,
   },
   {
     id: 3,
+    value: 'belgian',
     name: 'Belgian Food',
     icon: <GiFrenchFries />,
     isSelected: false,
   },
   {
     id: 4,
+    value: 'lebanese',
     name: 'Lebanese Food',
     icon: <GiCookingPot />,
     isSelected: false,
   },
   {
     id: 5,
-    name: 'Japanese Food',
+    value: 'hotdogs',
+    name: 'Fast Food',
     icon: <GiHamburger />,
     isSelected: false,
   },
   {
     id: 6,
+    value: 'mexican',
     name: 'Mexican Food',
     icon: <GiTacos />,
     isSelected: false,
   },
   {
     id: 7,
+    value: 'turkish',
     name: 'Turkish Food',
     icon: <GiKebabSpit />,
     isSelected: false,
   },
   {
     id: 8,
+    value: 'indpak',
     name: 'Indian Food',
     icon: <GiIndianPalace />,
     isSelected: false,
@@ -105,23 +113,23 @@ const allCategories = [
 
 const priceTypes = [
   {
-    id: 1,
-    value: '€',
+    value: 1,
+    label: '€',
     isSelected: false,
   },
   {
-    id: 2,
-    value: '€€',
+    value: 2,
+    label: '€€',
     isSelected: false,
   },
   {
-    id: 3,
-    value: '€€€',
+    value: 3,
+    label: '€€€',
     isSelected: false,
   },
   {
-    id: 4,
-    value: '€€€€',
+    value: 4,
+    label: '€€€€',
     isSelected: false,
   },
 ];
@@ -175,7 +183,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
     const togglePrice = price;
 
     togglePrice.isSelected = !togglePrice.isSelected;
-    newArray = rangePrice.filter((c) => c.id !== togglePrice.id);
+    newArray = rangePrice.filter((p) => p.value !== togglePrice.value);
     if (togglePrice.isSelected) {
       newArray.push(togglePrice);
     }
@@ -191,7 +199,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
             <FormControl>
               <TextField
                 name="localisation"
-                label="City"
+                label="City, Department..."
                 onChange={(e) => setLocalisation(e.target.value)}
               />
             </FormControl>
@@ -200,14 +208,14 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
               <span>Price (€)</span>
               {priceTypes.map((price) => (
                 <Button
-                  key={price.id}
+                  key={price.value}
                   variant={price.isSelected ? 'contained' : 'outlined'}
                   color="secondary"
-                  value={price.id}
+                  value={price.value}
                   size="small"
                   onClick={() => onCLickRangePrice(price)}
                 >
-                  {price.value}
+                  {price.label}
                 </Button>
               ))}
             </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/Layout';
 import BusinessCard from '../components/BusinessCard';
-import RestaurantResearchForm from '../components/RestaurantResearchForm';
+import RestaurantResearchForm from '../components/BusinessResearchForm';
 
 import css from '../styles/index.module.css';
 
