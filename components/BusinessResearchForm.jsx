@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Slider from '@material-ui/core/Slider';
 import {
@@ -15,8 +14,8 @@ import {
 } from 'react-icons/gi';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-// import PlacesAutocomplete from './InputPlacesAutoComplete';
+
+import PlacesAutocomplete from './InputPlacesAutoComplete';
 import css from './BusinessResearchForm.module.css';
 
 import FoodCategories from './FoodCategories';
@@ -194,15 +193,11 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
   return (
     <>
       <Card className={css.container}>
-        <form>
+        <form autoComplete="off">
           <div className={css.InputsContainer}>
-            <FormControl>
-              <TextField
-                name="localisation"
-                label="City, Department..."
-                onChange={(e) => setLocalisation(e.target.value)}
-              />
-            </FormControl>
+            <PlacesAutocomplete
+              handleLocalisation={(newValue) => setLocalisation(newValue)}
+            />
 
             <div className={css.priceTypes}>
               <span>Price (€)</span>
@@ -241,7 +236,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
             }
             allCategories={allCategories}
           />
-
+          {localisation}
           <Button
             variant="contained"
             color="secondary"
@@ -249,7 +244,6 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
           >
             Search
           </Button>
-          {/* <PlacesAutocomplete /> */}
         </form>
       </Card>
     </>
