@@ -6,67 +6,64 @@ import Alert from '@material-ui/lab/Alert';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
-// import { useUser } from '../lib/hooks';
 import css from './AuthenticationForm.module.css';
 
 const AuthForm = ({ dialogType, handleDialogType }) => {
-  // useUser({ redirectTo: '/', redirectIfFound: true });
-
-  const [errorMsg, setErrorMsg] = useState('');
+  const [alert, setAlert] = useState(null);
 
   async function handleSignInFormSubmit(e) {
     e.preventDefault();
     const { username, password } = e.currentTarget;
 
-    console.log(username.value, password.value);
-
-    if (errorMsg) setErrorMsg('');
+    if (alert) setAlert(null);
     try {
-      const res = await axios.post('/api/login', {
+      await axios.post('/api/signIn', {
         username: username.value,
         password: password.value,
       });
-      if (res.status === 200) {
-        console.log('Success (authentication)');
-        // Router.push('/profile');
-      } else {
-        console.log('Failed (authentication)');
-      }
+      setAlert(null);
+      Router.replace('/profile');
     } catch (error) {
-      console.error('An unexpected error happened occurred:', error);
-      setErrorMsg(error.message);
+      setAlert({ type: 'error', value: 'Incorrect username or password.' });
     }
   }
 
   async function handleSignUpFormSubmit(e) {
     e.preventDefault();
-    const { username, password, rpassword } = e.currentTarget;
+    const { username, email, password, rpassword } = e.currentTarget;
 
-    if (errorMsg) setErrorMsg('');
+    if (alert) setAlert(null);
     if (!username.value) {
-      setErrorMsg(`Username is empty`);
+      setAlert({ type: 'error', value: 'Username is empty' });
       return;
     }
     if (password.value.length < 8) {
-      setErrorMsg(`The password must contain at least 8 characters`);
+      setAlert({
+        type: 'error',
+        value: 'The password must contain at least 8 characters',
+      });
       return;
     }
     if (password.value !== rpassword.value) {
-      setErrorMsg(`The passwords don't match`);
+      setAlert({ type: 'error', value: "The passwords don't match" });
       return;
     }
     try {
-      const res = await axios.post('api/signup', {
+      const res = await axios.post('/api/signUp', {
+        email: email.value,
         username: username.value,
         password: password.value,
       });
-
-      if (!res.data.user) {
-        setErrorMsg(`User already exists`);
-        return;
-      }
-    } catch (error) {
-      setErrorMsg(error.message);
+      setAlert({
+        type: 'success',
+        value: res.data.message,
+      });
+      handleDialogType('sign-in');
+    } catch (err) {
+      setAlert({
+        type: 'error',
+        value: err.text(),
+      });
     }
   }
 
@@ -79,13 +76,16 @@ const AuthForm = ({ dialogType, handleDialogType }) => {
           : handleSignUpFormSubmit
       }
     >
-      {errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+      {alert && <Alert severity={alert.type}>{alert.value}</Alert>}
 
       <TextField
         name="username"
         label="Username"
         style={{ margin: '0.5rem 0' }}
       />
+      {dialogType === 'sign-up' && (
+        <TextField name="email" label="Email" style={{ margin: '0.5rem 0' }} />
+      )}
       <TextField
         name="password"
         label="Password"

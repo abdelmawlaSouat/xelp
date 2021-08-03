@@ -14,7 +14,6 @@ function PlacesAutocomplete({ handleLocalisation }) {
       inputValue: newInputValue,
     });
     setOptions(response.data.predictions);
-    // console.log(response.data.predictions);
   }
 
   return (

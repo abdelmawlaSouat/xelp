@@ -2,13 +2,12 @@ import { useUser } from '../lib/hooks';
 import Layout from '../components/Layout';
 
 const Profile = () => {
-  const user = useUser({ redirectTo: '/' });
+  const [user] = useUser();
 
   return (
     <Layout>
-      YTOOO
       <h1>Profile</h1>
-      {user}
+
       {user && (
         <>
           <p>Your session:</p>

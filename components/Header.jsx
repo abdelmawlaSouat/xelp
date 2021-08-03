@@ -1,27 +1,31 @@
 import { useState } from 'react';
 import Link from 'next/link';
-
+import Router from 'next/router';
+import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import IconButton from '@material-ui/core/IconButton';
 import DialogContent from '@material-ui/core/DialogContent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-
 import { AiOutlineClose } from 'react-icons/ai';
 import AuthForm from './AuthenticationForm';
-
-import { useUser } from '../lib/hooks';
-
+import { useCurrentUser } from '../lib/hooks';
 import css from './Header.module.css';
 
 const Header = () => {
   const [dialogType, setDialogType] = useState('');
   const [open, setOpen] = useState(false);
-  // const user = useUser();
+  const [user, { mutate }] = useCurrentUser();
 
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
+  async function handleLogout() {
+    await axios.delete('/api/logout');
+    mutate(null);
+    Router.replace('/');
+  }
 
   const handleClickOpen = (formType) => {
     setDialogType(formType);
@@ -51,21 +55,30 @@ const Header = () => {
       </div>
       <nav>
         <ul>
-          {0 === 1 ? (
+          {user ? (
             <>
-              <li>
-                <Link href="/">
-                  <a>Home</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/profile">
-                  <a>Profile</a>
-                </Link>
-              </li>
-              <li>
-                <a href="/api/logout">Logout</a>
-              </li>
+              <Link href="/">
+                <a>
+                  <Button color="secondary" style={{ margin: '0 0.5rem' }}>
+                    HOME
+                  </Button>
+                </a>
+              </Link>
+              <Link href="/profile">
+                <a>
+                  <Button color="secondary" style={{ margin: '0 0.5rem' }}>
+                    Profile
+                  </Button>
+                </a>
+              </Link>
+              <Button
+                variant="contained"
+                color="secondary"
+                style={{ margin: '0 0.5rem' }}
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
             </>
           ) : (
             <>

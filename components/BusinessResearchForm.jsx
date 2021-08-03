@@ -148,6 +148,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
           longitude: position.coords.longitude,
         });
       },
+      // eslint-disable-next-line no-console
       (err) => console.warn(`ERREUR (${err.code}): ${err.message}`)
     );
   }
@@ -187,7 +188,6 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
       newArray.push(togglePrice);
     }
     setRangePrice(newArray);
-    console.log(newArray);
   }
 
   return (
