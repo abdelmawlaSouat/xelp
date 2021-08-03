@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useUser } from '../lib/hooks';
 import Layout from '../components/Layout';
 
