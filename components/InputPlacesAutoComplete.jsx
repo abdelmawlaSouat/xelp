@@ -13,6 +13,7 @@ function PlacesAutocomplete({ handleLocalisation }) {
     const response = await axios.post('api/autoCompletion', {
       inputValue: newInputValue,
     });
+    console.log(response.data.predictions);
     setOptions(response.data.predictions);
   }
 
