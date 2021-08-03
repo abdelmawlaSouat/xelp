@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Head from 'next/head';
 import Layout from '../components/Layout';
 import BusinessCard from '../components/BusinessCard';
 import RestaurantResearchForm from '../components/BusinessResearchForm';
@@ -9,6 +10,10 @@ const Home = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Xelp - The best restaurants</title>
+      </Head>
+
       <h2>Are there any food that you absolutely can’t live without ?</h2>
 
       <RestaurantResearchForm

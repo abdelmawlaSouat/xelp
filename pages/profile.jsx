@@ -6,6 +6,10 @@ const Profile = () => {
 
   return (
     <Layout>
+      <Head>
+        <title>Xelp - Your Profile</title>
+      </Head>
+
       <h1>Profile</h1>
 
       {user && (
