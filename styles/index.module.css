@@ -1,15 +1,13 @@
 .businessesContainer {
-  margin: 7rem 0;
-  width: 100%;
+  margin: 4rem 7rem;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1200px) {
   .businessesContainer {
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    margin: 5rem 0;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    margin: 4rem 1rem;
   }
 }

@@ -1,11 +1,12 @@
 .card a {
   margin: 1rem;
   padding: 1rem 1.5rem;
-  border: 1px #c9c9c9 solid;
+  box-shadow: 1px 1px 10px 1px rgba(117, 117, 117, 0.6);
   border-radius: 5px;
   display: flex;
   transition: all 0.2s ease;
   text-decoration: none;
+  background-color: white;
 }
 
 .card a:hover {
@@ -76,7 +77,7 @@
   line-height: 1.35rem;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 500px) {
   .imageUrl {
     margin-right: 0;
   }
@@ -88,6 +89,5 @@
   .card a {
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 }
