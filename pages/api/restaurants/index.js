@@ -57,7 +57,11 @@ export default async function restaurants(req, res) {
     });
     const resp = await rawData.json();
 
-    res.status(200).json(resp.businesses);
+    resp.businesses.sort(
+      (a, b) => b.review_count - a.review_count || b.rating - a.rating
+    );
+
+    res.status(200).json(resp.businesses.slice(0, 10));
   } catch (error) {
     res.status(500).end('Error with the Yelp API');
   }

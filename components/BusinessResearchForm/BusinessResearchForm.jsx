@@ -171,7 +171,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
         getUserPosition();
         const response = await axios.post('api/restaurants', researchParams);
         handleBusinesses(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         console.error(err);
       }

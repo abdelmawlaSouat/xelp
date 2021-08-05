@@ -3,7 +3,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { BiComment, BiPhone } from 'react-icons/bi';
 import css from './BusinessCard.module.css';
 
-const BusinessCard = ({ businessData }) => {
+const BusinessCard = ({ businessData, index }) => {
   function categoriesToString() {
     let categoriesString = '';
     const { categories } = businessData;
@@ -26,7 +26,7 @@ const BusinessCard = ({ businessData }) => {
         />
         <div className={css.cardTextContainer}>
           <div>
-            <span className={css.name}>{businessData.name}</span>
+            <span className={css.name}>{`${index} -${businessData.name}`}</span>
             <p className={css.categoriesAndPrice}>
               <span>{categoriesToString()}</span>
               {businessData.price && <span>{` - ${businessData.price}`}</span>}

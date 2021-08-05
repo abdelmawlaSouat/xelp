@@ -22,8 +22,12 @@ const Home = () => {
 
       <div className={css.businessesContainer}>
         {businesses.length > 0 &&
-          businesses.map((business) => (
-            <BusinessCard key={business.id} businessData={business} />
+          businesses.map((business, index) => (
+            <BusinessCard
+              key={business.id}
+              businessData={business}
+              index={index + 1}
+            />
           ))}
       </div>
     </Layout>
