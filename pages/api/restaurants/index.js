@@ -1,7 +1,7 @@
 const API_BASE_URL = 'https://api.yelp.com/v3';
 const PATH = '/businesses/search';
 
-function getFilters(obj) {
+export function getFilters(obj) {
   const filters = {
     localisation: obj.localisation,
     radius: obj.maxDistance * 1000,
@@ -27,7 +27,7 @@ function getFilters(obj) {
   return filters;
 }
 
-function getUrl(filters, userCoords) {
+export function getUrl(filters, userCoords) {
   let url = `${API_BASE_URL}${PATH}?term=food`;
   const { longitude, latitude } = userCoords;
 
@@ -53,13 +53,9 @@ export default async function restaurants(req, res) {
     const filters = getFilters(req.body);
     const url = getUrl(filters, userCoords);
     const rawData = await fetch(url, {
-      headers: { Authorization: `Bearer ${process.env.API_KEY_YELP}` }, // withCredentials: true,
+      headers: { Authorization: `Bearer ${process.env.API_KEY_YELP}` },
     });
     const resp = await rawData.json();
-
-    // console.log(filters);
-    console.log(url);
-    // console.log(resp.businesses);
 
     res.status(200).json(resp.businesses);
   } catch (error) {

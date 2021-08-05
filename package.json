@@ -8,12 +8,9 @@
     "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
     "@material-ui/core": "^4.12.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "axios": "^0.21.1",
-    "babel-jest": "^27.0.6",
     "bcryptjs": "^2.4.3",
     "connect-mongo": "^3.2.0",
     "express-session": "^1.17.1",
@@ -46,6 +43,9 @@
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "jest": "^27.0.6",
+    "babel-jest": "^27.0.6",
+    "@babel/core": "^7.15.0",
+    "@babel/preset-env": "^7.15.0",
     "prettier": "^2.3.2"
   }
 }
