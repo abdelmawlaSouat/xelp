@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import css from './AuthenticationForm.module.css';
 
-const AuthForm = ({ dialogType, handleDialogType }) => {
+const AuthenticationForm = ({ dialogType, handleDialogType }) => {
   const [alert, setAlert] = useState(null);
 
   async function handleSignInFormSubmit(e) {
@@ -136,9 +136,9 @@ const AuthForm = ({ dialogType, handleDialogType }) => {
   );
 };
 
-AuthForm.propTypes = {
+AuthenticationForm.propTypes = {
   dialogType: PropTypes.string.isRequired,
   handleDialogType: PropTypes.func.isRequired,
 };
 
-export default AuthForm;
+export default AuthenticationForm;

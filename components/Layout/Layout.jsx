@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Header from './Header';
+import Header from '../Header';
 import css from './Layout.module.css';
 
 // eslint-disable-next-line react/prop-types

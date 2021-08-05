@@ -15,10 +15,10 @@ import {
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
-import PlacesAutocomplete from './InputPlacesAutoComplete';
+import CityAutoCompleteField from '../CityAutoCompleteField';
 import css from './BusinessResearchForm.module.css';
 
-import FoodCategories from './FoodCategories';
+import FoodCategories from '../FoodCategories/FoodCategories';
 
 const PrettoSlider = withStyles({
   root: {
@@ -195,7 +195,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
       <Card className={css.container}>
         <form autoComplete="off">
           <div className={css.InputsContainer}>
-            <PlacesAutocomplete
+            <CityAutoCompleteField
               handleLocalisation={(newValue) => setLocalisation(newValue)}
             />
 

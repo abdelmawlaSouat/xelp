@@ -9,8 +9,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import { AiOutlineClose } from 'react-icons/ai';
-import AuthForm from './AuthenticationForm';
-import { useCurrentUser } from '../lib/hooks';
+import AuthenticationForm from '../AuthenticationForm';
+import { useCurrentUser } from '../../lib/hooks';
 import css from './Header.module.css';
 
 const Header = () => {
@@ -115,7 +115,7 @@ const Header = () => {
               <CloseBtn />
             </div>
             <DialogContent>
-              <AuthForm
+              <AuthenticationForm
                 dialogType={dialogType}
                 handleDialogType={handleDialogType}
               />
@@ -128,7 +128,7 @@ const Header = () => {
               <CloseBtn />
             </div>
             <DialogContent>
-              <AuthForm
+              <AuthenticationForm
                 dialogType={dialogType}
                 handleDialogType={handleDialogType}
               />
