@@ -47,7 +47,7 @@ const Header = () => {
   const handleDialogType = (formType) => setDialogType(formType);
 
   return (
-    <header className={css.header}>
+    <header className={css.header} data-testid="header">
       <div className={css.logo}>
         <Link href="/">
           <a>xelp</a>

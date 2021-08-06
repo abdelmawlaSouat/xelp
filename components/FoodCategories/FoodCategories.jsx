@@ -24,6 +24,7 @@ const FoodCategories = ({
   return (
     <Grid
       container
+      data-testid="food-categories"
       className={css.foodCategories}
       spacing={1}
       justifyContent="center"

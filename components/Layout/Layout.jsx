@@ -11,7 +11,7 @@ const Layout = ({ children }) => (
 
     <Header />
 
-    <main>
+    <main data-testid="layout">
       <div className={css.container}>{children}</div>
     </main>
   </>

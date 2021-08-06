@@ -18,6 +18,7 @@ function CityAutoCompleteField({ handleLocalisation }) {
 
   return (
     <Autocomplete
+      data-testid="city-field-container"
       style={{ width: 200 }}
       getOptionLabel={(option) => option.description}
       getOptionSelected={(option, val) => option.place_id === val.place_id}
@@ -44,8 +45,13 @@ function CityAutoCompleteField({ handleLocalisation }) {
   );
 }
 
+CityAutoCompleteField.defaultProps = {
+  handleLocalisation: () =>
+    // eslint-disable-next-line no-console
+    console.log('Add a function to get localisation state'),
+};
 CityAutoCompleteField.propTypes = {
-  handleLocalisation: PropTypes.func.isRequired,
+  handleLocalisation: PropTypes.func,
 };
 
 export default CityAutoCompleteField;

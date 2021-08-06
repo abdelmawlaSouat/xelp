@@ -192,7 +192,7 @@ const RestaurantResearchForm = ({ handleBusinesses }) => {
 
   return (
     <>
-      <Card className={css.container}>
+      <Card className={css.container} data-testid="business-research-form">
         <form autoComplete="off">
           <div className={css.InputsContainer}>
             <CityAutoCompleteField
